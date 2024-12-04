@@ -1,185 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turbo Lite — Bypasser</title>
+    <title>Thông Báo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
             text-align: center;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            text-align: center;
-        }
-        input, button {
-            padding: 10px;
-            margin: 10px 0;
-        }
-        button[disabled] {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            max-width: 500px;
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            z-index: 1000;
-        }
-        .popup h3 {
+            color: #ff4d4f;
             margin: 0 0 10px;
         }
-        .popup button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-        .support-list {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #555;
-            line-height: 1.8;
-            text-align: center;
-        }
-        .support-list ul {
-            padding: 0;
+        p {
+            font-size: 18px;
             margin: 0;
-            list-style-position: inside;
-        }
-        .support-list li {
-            display: inline-block;
-            margin: 5px 15px;
-            text-align: center;
-        }
-        .credits {
-            margin-top: 50px;
-            text-align: center;
-            font-size: 14px;
-            color: #777;
-        }
-        .credits img {
-            width: 50px;
-            cursor: pointer;
-            margin-bottom: 10px;
-            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <h1>App Bypass Link</h1>
-    <p>Hãy Nhập Link Và Bypass Link !!</p>
-    <input type="text" id="urlInput" placeholder="Nhập Link Vào Đây" />
-    <button id="submitButton" onclick="sendRequest()">Bypass Link</button>
-
-    <!-- Overlay và Pop-up -->
-    <div class="overlay" id="overlay"></div>
-    <div class="popup" id="popup">
-        <h3>Bypass Link Phản Hồi</h3>
-        <p id="popupResult">Đang Bypass ...</p>
-        <button onclick="openInNewTab()">Mở Link Trong Chrome</button>
-        <button onclick="closePopup()">Đóng</button>
+    <div class="container">
+        <h1>App Hiện Tại Đang Lỗi</h1>
+        <p>Cảm ơn Các Bạn</p>
     </div>
-
-    <!-- Danh sách hỗ trợ -->
-    <div class="support-list">
-        <strong>Hỗ Trợ Bypass Những Link</strong>
-        <ul>
-            <li>Delta (Lootlink)</li>
-            <li>Loot-links.com</li>
-            <li>Linkvertise</li>
-        </ul>
-    </div>
-
-    <!-- Credit -->
-    <div class="credits">
-        <a href="https://discord.gg/zKA8VNHzME" target="_blank">
-            <img src="https://t4.ftcdn.net/jpg/05/47/13/83/360_F_547138378_LZdOI7bvbWkYdq47ieI6WMfmKNs4wns9.jpg" alt="Turbo Lite" />
-        </a>
-        <br />
-        © Turbo Lite
-    </div>
-
-    <script>
-        async function sendRequest() {
-            const urlInput = document.getElementById("urlInput").value;
-            const submitButton = document.getElementById("submitButton");
-
-            // Mở URL mặc định trong tab mới
-            window.open("https://youtube.com/@turboxlite", "_blank");
-
-            // Đổi trạng thái nút
-            submitButton.innerText = "Đang Bypass...";
-            submitButton.disabled = true;
-
-            if (!urlInput) {
-                alert("Vui lòng nhập URL!");
-                submitButton.innerText = "Bypass Link"; // Khôi phục trạng thái nút
-                submitButton.disabled = false;
-                return;
-            }
-
-            try {
-                const response = await fetch(`https://api.bypass.vip/bypass?url=${encodeURIComponent(urlInput)}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP Error: ${response.status}`);
-                }
-                const data = await response.json();
-
-                if (data.result) {
-                    showPopup(data.result);
-                } else {
-                    showPopup("Bị Lỗi Hoặc Link Không Hỗ Trợ  !");
-                }
-            } catch (error) {
-                showPopup(`Có lỗi xảy ra: ${error.message}`);
-            } finally {
-                submitButton.innerText = "Bypass Link"; // Khôi phục trạng thái nút
-                submitButton.disabled = false;
-            }
-        }
-
-        function showPopup(message) {
-            document.getElementById("popupResult").innerText = message;
-            document.getElementById("popupResult").setAttribute("data-url", message.startsWith("http") ? message : "");
-            document.getElementById("popup").style.display = "block";
-            document.getElementById("overlay").style.display = "block";
-        }
-
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
-            document.getElementById("overlay").style.display = "none";
-        }
-
-        function openInNewTab() {
-            const resultElement = document.getElementById("popupResult");
-            const url = resultElement.getAttribute("data-url");
-
-            if (url && url.startsWith("http")) {
-                window.open(url, "_blank");
-            } else {
-                alert("Kết quả không phải là một URL hợp lệ!");
-            }
-        }
-    </script>
 </body>
 </html>
