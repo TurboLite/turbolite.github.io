@@ -1,43 +1,87 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông Báo</title>
+    <title>API Bypass</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f9f9f9;
-            color: #333;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
         }
+
         .container {
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
+
         h1 {
-            color: #ff4d4f;
-            margin: 0 0 10px;
+            margin-bottom: 20px;
+            font-size: 28px;
         }
+
         p {
-            font-size: 18px;
-            margin: 0;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        input {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        button {
+            background: #2575fc;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #1b5dca;
         }
     </style>
+    <script>
+        function openWithAPI() {
+            const userInput = document.getElementById('urlInput').value;
+            if (userInput.trim() === '') {
+                alert('Vui lòng nhập URL hợp lệ.');
+                return;
+            }
+            const apiURL = `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(userInput)}`;
+            window.open(apiURL, '_blank');
+        }
+    </script>
 </head>
 <body>
     <div class="container">
-        <h1>App Hiện Tại Đang Lỗi</h1>
-        <p>Cảm ơn Các Bạn</p>
+        <h1>Bypass Get Key Trigon</h1>
+
+        <p>Nếu Hiện "Failed to bypass" </p>
+ <p> Quay Lại Bấm "Bypass Link" 2 3 Lần !</p>
+<p> Hiện "Completed" Là Bypass Được Nha </p>
+
+        <input type="text" id="urlInput" placeholder="Nhập Link Và Bấm Bypass Link Nha">
+        <button onclick="openWithAPI()">Bypass Link</button>
     </div>
 </body>
 </html>
