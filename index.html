@@ -7,81 +7,79 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            margin: 20px;
+        }
+        .form-container {
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            color: #fff;
-        }
-
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        h1 {
+            gap: 10px;
             margin-bottom: 20px;
-            font-size: 28px;
         }
-
-        p {
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-
-        input {
-            width: 100%;
-            max-width: 400px;
+        input[type="text"] {
+            flex: 1;
             padding: 10px;
-            border: none;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            outline: none;
-        }
-
-        button {
-            background: #2575fc;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
             font-size: 16px;
-            transition: background 0.3s ease;
         }
-
-        button:hover {
-            background: #1b5dca;
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            white-space: pre-wrap; /* Allow text to wrap properly */
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #555;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+        .footer-text {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
         }
     </style>
-    <script>
-        function openWithAPI() {
-            const userInput = document.getElementById('urlInput').value;
-            if (userInput.trim() === '') {
-                alert('Vui lòng nhập URL hợp lệ.');
-                return;
-            }
-            const apiURL = `https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(userInput)}`;
-            window.open(apiURL, '_blank');
-        }
-    </script>
 </head>
 <body>
-    <div class="container">
-        <h1>Bypass Get Key Trigon</h1>
+    <h1>Bypass Link Key Trigon</h1>
+    <p class="subtitle">Nhập Link Trigon Và Bấm Bypass</p>
+    <form id="apiForm" class="form-container">
+        <input type="text" id="urlInput" name="url" placeholder="Nhập Link!" required>
+        <button type="submit">Bypass</button>
+    </form>
+    <div class="output" id="output"></div>
+    <p class="footer-text">Nếu Hiện: You Have Been Authenticated! Please Proceed Back To The Application.</p>
+    <p class="footer-text">Là Đã Bypass Trigon Thành Công Nha!</p>
+    <script>
+        document.getElementById('apiForm').addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the form from submitting normally
 
-        <p>Nếu Hiện "Failed to bypass" </p>
- <p> Quay Lại Bấm "Bypass Link" 2 3 Lần !</p>
-<p> Hiện "Completed" Là Bypass Được Nha </p>
+            const url = document.getElementById('urlInput').value;
+            const outputDiv = document.getElementById('output');
+            outputDiv.textContent = "Đang Bypass ...";
 
-        <input type="text" id="urlInput" placeholder="Nhập Link Và Bấm Bypass Link Nha">
-        <button onclick="openWithAPI()">Bypass Link</button>
-    </div>
+            try {
+                // Make a request to the API
+                const response = await fetch(`https://triple.kys.gay/api/bypass?apikey=TPL_0HB927Hsk&url=${encodeURIComponent(url)}`);
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                if (data.key) {
+                    outputDiv.textContent = `Key: ${data.key}`;
+                } else {
+                    outputDiv.textContent = "Key not found in response.";
+                }
+            } catch (error) {
+                outputDiv.textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
 </body>
 </html>
