@@ -3,83 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Bypass</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+    <title>API URL Executor</title>
+    <script>
+        function openApiUrl() {
+            const userInput = document.getElementById('urlInput').value;
+            if (!userInput) {
+                alert('Vui lòng nhập URL!');
+                return;
+            }
+
+            const apiUrl = `http://fi4.bot-hosting.net:22869/executor?url=${encodeURIComponent(userInput)}`;
+            window.open(apiUrl, '_blank');
         }
-        .form-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        input[type="text"] {
-            flex: 1;
-            padding: 10px;
-            font-size: 16px;
-        }
-        button {
-            padding: 10px 15px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .output {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            white-space: pre-wrap; /* Allow text to wrap properly */
-        }
-        .subtitle {
-            font-size: 14px;
-            color: #555;
-            margin-top: -10px;
-            margin-bottom: 20px;
-        }
-        .footer-text {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #333;
-        }
-    </style>
+    </script>
 </head>
 <body>
-    <h1>Bypass Link Key Trigon</h1>
-    <p class="subtitle">Nhập Link Trigon Và Bấm Bypass</p>
-    <form id="apiForm" class="form-container">
-        <input type="text" id="urlInput" name="url" placeholder="Nhập Link!" required>
-        <button type="submit">Bypass</button>
-    </form>
-    <div class="output" id="output"></div>
-    <p class="footer-text">Nếu Hiện: You Have Been Authenticated! Please Proceed Back To The Application.</p>
-    <p class="footer-text">Là Đã Bypass Trigon Thành Công Nha!</p>
-    <script>
-        document.getElementById('apiForm').addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent the form from submitting normally
-
-            const url = document.getElementById('urlInput').value;
-            const outputDiv = document.getElementById('output');
-            outputDiv.textContent = "Đang Bypass ...";
-
-            try {
-                // Make a request to the API
-                const response = await fetch(`https://triple.kys.gay/api/bypass?apikey=TPL_0HB927Hsk&url=${encodeURIComponent(url)}`);
-                if (!response.ok) {
-                    throw new Error(`API Error: ${response.statusText}`);
-                }
-
-                const data = await response.json();
-                if (data.key) {
-                    outputDiv.textContent = `Key: ${data.key}`;
-                } else {
-                    outputDiv.textContent = "Key not found in response.";
-                }
-            } catch (error) {
-                outputDiv.textContent = `Error: ${error.message}`;
-            }
-        });
-    </script>
+    <h1>Bypass Trigon</h1>
+    <label for="urlInput">Nhập Link:</label>
+    <input type="text" id="urlInput" placeholder="Nhập URL tại đây" />
+    <button onclick="openApiUrl()">Bypass</button>
 </body>
 </html>
