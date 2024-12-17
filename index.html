@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API URL Executor</title>
+    <title>Bypasser</title>
     <script>
         function openApiUrl() {
             const userInput = document.getElementById('urlInput').value;
@@ -12,7 +12,7 @@
                 return;
             }
 
-            const apiUrl = `http://fi4.bot-hosting.net:22869/executor?url=${encodeURIComponent(userInput)}`;
+            const apiUrl = `https://api.speedx.lol/api/free/bypass?url=${encodeURIComponent(userInput)}`;
             window.open(apiUrl, '_blank');
         }
     </script>
@@ -20,7 +20,7 @@
 <body>
     <h1>Bypass Trigon</h1>
     <label for="urlInput">Nhập Link:</label>
-    <input type="text" id="urlInput" placeholder="Nhập URL tại đây" />
+    <input type="text" id="urlInput" placeholder="Nhập Link Fluxus Tại Đây" />
     <button onclick="openApiUrl()">Bypass</button>
 </body>
 </html>
