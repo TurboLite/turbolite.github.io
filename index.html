@@ -1,132 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bypasser</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0f2f5;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
-        .container {
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            padding: 30px;
-            width: 100%;
-        }
-        h1 {
-            font-size: 36px;
-            font-weight: bold;
-            color: #007bff;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 14px;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-        .app-list {
-            margin-top: 20px;
-            text-align: left;
-        }
-        .app-list h3 {
-            font-size: 18px;
-            color: #555;
-            margin-bottom: 10px;
-        }
-        .app-list ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .app-list ul li {
-            padding: 10px;
-            margin-bottom: 8px;
-            background: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            color: #333;
-        }
-        .app-list ul li:first-child {
-            border-top: none;
-        }
-        .app-list ul li::before {
-            content: "🟢";
-            margin-right: 10px;
-            color: #007bff;
-        }
-        .discord-link {
-            margin-top: 30px;
-            font-size: 14px;
-            color: #555;
-        }
-        .discord-link a {
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .discord-link a:hover {
-            text-decoration: underline;
-        }
-    </style>
-    <script>
-        function openApiUrl() {
-            const url = document.getElementById('urlInput').value.trim();
-            if (!url) {
-                alert('Vui lòng nhập URL!');
-                return;
-            }
-            window.open(`https://ethos.kys.gay/api/free/bypass?url=${encodeURIComponent(url)}`, '_blank');
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ghi chú với liên kết GitHub</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      resize: none;
+    }
+    button, a {
+      margin-top: 10px;
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover, a:hover {
+      background-color: #0056b3;
+    }
+    a {
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Bypasser Link</h1>
-        <input id="urlInput" type="text" placeholder="Nhập Link Tại Đây">
-        <button onclick="openApiUrl()">Bypass Link</button>
-        <div class="app-list">
-            <h3>Get Key Link</h3>
-            <ul>
-                <li>Trigon</li>
-                <li>Fluxus</li>
-                <li>LootLabs</li>
-            </ul>
-        </div>
-        <div class="discord-link">
-            <p>© <a href="https://dsc.gg/meowx" target="_blank">https://dsc.gg/meowx</a></p>
-        </div>
+  <div class="container">
+    <h2>Ghi chú với liên kết GitHub</h2>
+    <textarea id="note" placeholder="Nhập ghi chú của bạn ở đây..."></textarea>
+    <button onclick="generateLink()">Tạo liên kết</button>
+    <div id="linkContainer" style="margin-top: 20px; display: none;">
+      <p>Liên kết của bạn:</p>
+      <a id="generatedLink" href="#" target="_blank">Mở ghi chú</a>
     </div>
+  </div>
+
+  <script>
+    const githubPagesUrl = "https://turbolite.github.io";
+
+    function generateLink() {
+      const note = document.getElementById('note').value;
+      if (!note.trim()) {
+        alert("Vui lòng nhập nội dung ghi chú!");
+        return;
+      }
+      const encodedNote = encodeURIComponent(note);
+      const link = `${githubPagesUrl}/?note=${encodedNote}`;
+      
+      const linkContainer = document.getElementById('linkContainer');
+      const generatedLink = document.getElementById('generatedLink');
+      
+      generatedLink.href = link;
+      generatedLink.textContent = link;
+      linkContainer.style.display = "block";
+    }
+  </script>
 </body>
 </html>
