@@ -1,10 +1,293 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-    <meta http-equiv="refresh" content="0; url=https://discord.com/invite/YOUR_INVITE_CODE">
-    <title>Redirecting...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>King Tool</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url('background.jpg'); 
+            background-size: cover; 
+            background-position: center;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            color: white; 
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .info-container {
+            background-color: rgba(0, 0, 0, 0.7); 
+            padding: 30px;
+            border-radius: 10px; 
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); 
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            z-index: 1; 
+        }
+        .footer {
+        margin-top: 40px;
+        font-size: 14px;
+        color: #666;
+        padding: 20px; /* Add padding here */
+        text-align: center; /* Center text */
+        }
+        .info-container h2 {
+            color: #fff;
+        }
+
+        .info-container p {
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+        .info-container a {
+            color: #00ccff;
+            text-decoration: none;
+        }
+
+        .key-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .key {
+            font-size: 24px;
+            color: #007bff;
+            border: 1px solid #007bff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-right: 10px; /* Space between key and button */
+            background-color: rgba(255, 255, 255, 0.1); /* Slightly light background */
+        }
+
+        .copy-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .copy-button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+
+        .copy-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .copy-icon:before,
+        .copy-icon:after {
+            content: '';
+            position: absolute;
+            background-color: white;
+        }
+
+        .copy-icon:before {
+            width: 100%;
+            height: 5px;
+            top: 8px;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        .copy-icon:after {
+            width: 5px;
+            height: 15px;
+            top: 0;
+            left: 10px;
+            border-radius: 2px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #666;
+            padding: 20px; /* Added padding */
+            text-align: center; /* Center text */
+        }
+    </style>
 </head>
 <body>
-    <p>If you are not redirected, <a href="https://discord.com/invite/YOUR_INVITE_CODE">click here</a>.</p>
+
+    <canvas id="bgCanvas"></canvas>
+    <div class="info-container">
+        <h2>Cám ơn vì đã dùng bot</h2>
+        <p id="date"></p>
+<!--         <div class="key-container">
+            <div class="key">Key: <strong id="key"></strong></div>
+            <button class="copy-button" id="copyButton" onclick="copyToClipboard()"> 
+                Copy 
+            </button>
+        </div> -->
+        <div class="key-container">
+            <div class="key">Key: <strong id="key"></strong></div>
+        </div>
+        <div class="key-container">
+            <button class="copy-button" id="copyButton" onclick="copyToClipboard()"> 
+                Copy 
+            </button>
+        </div>
+
+        <p><strong>Discord:</strong> <a href="https://discord.gg/wTgFes4pqD" target="_blank">Click!</a></p>
+    </div>    
+
+    <script>
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const particlesArray = [];
+        const numberOfParticles = 120;
+        let mouse = {
+            x: null,
+            y: null,
+            radius: 100
+        };
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1 + 2; 
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 - 1.5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.x > canvas.width || this.x < 0) {
+                    this.speedX = -this.speedX;
+                }
+                if (this.y > canvas.height || this.y < 0) {
+                    this.speedY = -this.speedY;
+                }
+            }
+            draw() {
+                ctx.fillStyle = 'white';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            let opacityValue = 1;
+            const connectionDistance = mouse.radius; 
+
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = Math.sqrt(
+                        (particlesArray[a].x - particlesArray[b].x) ** 2 +
+                        (particlesArray[a].y - particlesArray[b].y) ** 2
+                    );
+
+                    if (distance < connectionDistance) {
+                        opacityValue = 1 - (distance / connectionDistance);
+                        ctx.strokeStyle = 'rgba(255, 255, 255,' + opacityValue + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+
+                let mouseDistance = Math.sqrt(
+                    (particlesArray[a].x - mouse.x) ** 2 +
+                    (particlesArray[a].y - mouse.y) ** 2
+                );
+
+                if (mouseDistance < connectionDistance) {
+                    opacityValue = 1 - (mouseDistance / connectionDistance);
+                    ctx.strokeStyle = 'rgba(255, 255, 255,' + opacityValue + ')';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            connectParticles();
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const key = getQueryParameter('key');
+        document.getElementById('key').textContent = key ? key : 'Vui lòng get key lại.';
+        const currentDate = new Date().toLocaleDateString('vi-VN');
+        document.getElementById('date').textContent = `Ngày: ${currentDate}`;
+
+        function copyToClipboard() {
+            const keyElement = document.getElementById('key').textContent;
+            const newKey = '?ug ' + keyElement;  // Thêm '?ug%20' vào trước key
+            navigator.clipboard.writeText(keyElement)
+                .then(() => {
+                    alert("Key đã được sao chép vào clipboard!");
+                })
+                .catch(err => {
+                    console.error("Không thể sao chép key: ", err);
+                });
+        }
+    </script>
 </body>
 </html>
