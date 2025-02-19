@@ -17,6 +17,12 @@
       text-align: center;
     }
 
+    .game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .game-list {
       display: flex;
       flex-direction: column;
@@ -26,6 +32,7 @@
       box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
       padding: 20px;
       max-width: 300px;
+      margin-bottom: 15px; /* Tạo khoảng cách giữa các game-list */
     }
 
     .game-item {
@@ -68,12 +75,21 @@
 </head>
 <body>
 
-<div class="game-list">
-  <!-- Game Item 1 -->
-  <div class="game-item">
-    <img src="https://dl.memuplay.com/new_market/img/com.tykeji.ugphone.icon.2024-03-04-11-52-41.png" alt="">
-    <h3>Thiết Bị Miễn Phí</h3>
-    <a href="https://now.gg/apps/discord-inc-/1430/discord-talk-chat-hang-out.html" target="_blank">Vào Thiết Bị</a>
+<div class="game-container">
+  <div class="game-list">
+    <div class="game-item">
+      <img src="https://dl.memuplay.com/new_market/img/com.tykeji.ugphone.icon.2024-03-04-11-52-41.png" alt="">
+      <h3> Thiết Bị VPN </h3>
+      <a href="https://now.gg/apps/discord-inc-/1430/discord-talk-chat-hang-out.html" target="_blank">Vào Thiết Bị</a>
+    </div>
+  </div>
+
+  <div class="game-list">
+    <div class="game-item">
+      <img src="https://dl.memuplay.com/new_market/img/com.tykeji.ugphone.icon.2024-03-04-11-52-41.png" alt="">
+      <h3>Không VPN </h3>
+      <a href="https://doctoraux.com/play/demo/5880/snakeplanet" target="_blank">Vào Thiết Bị</a>
+    </div>
   </div>
 </div>
 
