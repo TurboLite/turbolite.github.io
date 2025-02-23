@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,83 +14,133 @@
       align-items: center;
       height: 100vh;
       text-align: center;
-    }
+    }.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    .game-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+.game-list {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 300px;
+  margin-bottom: 15px;
+}
 
-    .game-list {
-      display: flex;
-      flex-direction: column;
-      background-color: white;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      max-width: 300px;
-      margin-bottom: 15px; /* Tạo khoảng cách giữa các game-list */
-    }
+.game-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-    .game-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: #f9f9f9;
-      padding: 15px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    }
+.game-item img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+}
 
-    .game-item img {
-      width: 100px;
-      height: 100px;
-      border-radius: 10px;
-    }
+.game-item h3 {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  word-wrap: break-word;
+}
 
-    .game-item h3 {
-      font-size: 1.2rem;
-      margin: 10px 0;
-      word-wrap: break-word;
-    }
+.game-item a {
+  text-decoration: none;
+  color: white;
+  background-color: #1a73e8;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  display: inline-block;
+}
 
-    .game-item a {
-      text-decoration: none;
-      color: white;
-      background-color: #1a73e8;
-      padding: 10px 15px;
-      border-radius: 5px;
-      font-weight: bold;
-      display: inline-block;
-    }
+.game-item a:hover {
+  background-color: #135aba;
+}
 
-    .game-item a:hover {
-      background-color: #135aba;
-    }
+.alert-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  display: none;
+}
+
+.alert-buttons {
+  margin-top: 15px;
+}
+
+.alert-buttons button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.ok-btn {
+  background-color: #7289DA;
+  color: white;
+}
+
+.discord-btn {
+  background-color: #7289DA;
+  color: white;
+}
+
   </style>
 </head>
-<body>
-
-<div class="game-container">
+<body><div class="alert-box" id="alertBox">
+  <p>Theo Dõi Cập Nhật</p>
+  <div class="alert-buttons">
+    <button class="ok-btn" onclick="closeAlert()">Ok Okk</button>
+    <button class="discord-btn" onclick="openDiscord()">Discord</button>
+  </div>
+</div><div class="game-container">
   <div class="game-list">
     <div class="game-item">
       <img src="https://dl.memuplay.com/new_market/img/com.tykeji.ugphone.icon.2024-03-04-11-52-41.png" alt="">
-      <h3> Thiết Bị VPN </h3>
+      <h3>Thiết Bị VPN</h3>
       <a href="https://now.gg/apps/discord-inc-/1430/discord-talk-chat-hang-out.html" target="_blank">Vào Thiết Bị</a>
     </div>
-  </div>
-
-  <div class="game-list">
+  </div>  <div class="game-list">
     <div class="game-item">
       <img src="https://dl.memuplay.com/new_market/img/com.tykeji.ugphone.icon.2024-03-04-11-52-41.png" alt="">
-      <h3>Không VPN </h3>
+      <h3>Không VPN</h3>
       <a href="https://doctoraux.com/play/demo/5880/snakeplanet" target="_blank">Vào Thiết Bị</a>
     </div>
   </div>
-</div>
+</div><script>
+  function showAlert() {
+    document.getElementById('alertBox').style.display = 'block';
+  }
 
-</body>
+  function closeAlert() {
+    document.getElementById('alertBox').style.display = 'none';
+  }
+
+  function openDiscord() {
+    window.open('https://discord.gg/83HpRAPkRX', '_blank');
+  }
+
+  window.onload = function() {
+    showAlert();
+  };
+</script></body>
 </html>
