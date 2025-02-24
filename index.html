@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,85 +15,91 @@
       height: 100vh;
       text-align: center;
       flex-direction: column;
-    }
+    }.key-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .key-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+.key-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: black;
+  width: 250px;
+  position: relative;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border: 2px solid black;
+}
 
-    .key-box {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      color: black;
-      width: 250px;
-      position: relative;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-      border: 2px solid black;
-    }
+.key-box h2 {
+  font-weight: bold;
+}
 
-    .key-box h2 {
-      font-weight: bold;
-    }
+.key-box input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 80%;
+  margin-top: 10px;
+  text-align: center;
+}
 
-    .key-box input {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      width: 80%;
-      margin-top: 10px;
-      text-align: center;
-    }
+.key-box button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
 
-    .key-box button {
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      background-color: black;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
-    }
+.key-box button:hover {
+  background-color: gray;
+}
 
-    .key-box button:hover {
-      background-color: gray;
-    }
+.message {
+  margin-top: 10px;
+  font-weight: bold;
+}
 
-    .message {
-      margin-top: 10px;
-      font-weight: bold;
-    }
   </style>
 </head>
-<body>
-
-<div class="key-container" id="keyContainer">
+<body><div class="key-container" id="keyContainer">
   <div class="key-box">
     <h2>Turbo Lite</h2>
     <h3>Bạn Cần Nhập Key Để Chơi</h3>
     <h4>Free 24h Vô Hạn Chơi</h4>
     <input type="text" id="userKey" placeholder="Dán Key Vào Đây">
     <br>
-    <button onclick="window.open('https://link4sub.com/r6rI', '_blank')">Lấy Key</button>
+    <button onclick="copyKeyLink()">Lấy Key</button>
     <button onclick="checkKey()">Xác Nhận</button>
     <p id="message" class="message"></p>
   </div>
-</div>
-
-<script>
+</div><script>
   const validKeys = ["TurboLite", "XYZ789", "TURBO999"]; // Danh sách key hợp lệ
   const keyExpireTime = 24 * 60 * 60 * 1000; // 24 giờ
   const redirectURL = "https://turbolite.github.io/Tab/"; // URL chuyển hướng sau khi nhập key
+  const keyLink = "https://link4sub.com/r6rI"; // Link lấy key
+
+  function copyKeyLink() {
+    navigator.clipboard.writeText(keyLink).then(() => {
+      document.getElementById("message").style.color = "green";
+      document.getElementById("message").textContent = "Đã Copy Link Lấy Key, Bạn Vào Google Để Lấy Key Nha!";
+    }).catch(err => {
+      document.getElementById("message").style.color = "red";
+      document.getElementById("message").textContent = "Không Thể Copy Link";
+    });
+  }
 
   function checkKey() {
     const userKey = document.getElementById("userKey").value;
@@ -135,7 +140,5 @@
   }
 
   checkStoredKey();
-</script>
-
-</body>
+</script></body>
 </html>
