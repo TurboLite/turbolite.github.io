@@ -77,7 +77,7 @@
 <body><div class="key-container" id="keyContainer">
   <div class="key-box">
     <h2>Turbo Lite</h2>
-    <h3>Bạn Cần Nhập Key Để Chơi</h3>
+    <h3>Bạn Cần Lấy Key Để Chơi</h3>
     <h4>Free 24h Vô Hạn Chơi</h4>
     <input type="text" id="userKey" placeholder="Dán Key Vào Đây">
     <br>
@@ -86,7 +86,7 @@
     <p id="message" class="message"></p>
   </div>
 </div><script>
-  const validKeys = ["TurboLite", "XYZ789", "TURBO999"]; // Danh sách key hợp lệ
+  const validKeys = ["TurboLite", "2a9w1x5", "Meowx"]; // Danh sách key hợp lệ
   const keyExpireTime = 24 * 60 * 60 * 1000; // 24 giờ
   const redirectURL = "https://turbolite.github.io/Tab/"; // URL chuyển hướng sau khi nhập key
   const keyLink = "https://link4sub.com/r6rI"; // Link lấy key
@@ -94,7 +94,7 @@
   function copyKeyLink() {
     navigator.clipboard.writeText(keyLink).then(() => {
       document.getElementById("message").style.color = "green";
-      document.getElementById("message").textContent = "Đã Copy Link Lấy Key, Bạn Vào Google Để Lấy Key Nha!";
+      document.getElementById("message").textContent = "Đã Copy Link Lấy Key, Bạn Vào Google Và Dán Để Lấy Key";
     }).catch(err => {
       document.getElementById("message").style.color = "red";
       document.getElementById("message").textContent = "Không Thể Copy Link";
@@ -131,7 +131,7 @@
 
     if (storedKey && validKeys.includes(storedKey)) {
       if (keyTimestamp && Date.now() - parseInt(keyTimestamp) < keyExpireTime) {
-        document.getElementById("message").textContent = "Bạn Đã Nhập Key...";
+        document.getElementById("message").textContent = "Hello Bạn...";
         setTimeout(() => {
           window.location.href = redirectURL;
         }, 1500);
