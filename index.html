@@ -1,8 +1,9 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Turbo Lite</title>
+  <title>Turbo Lite - Get Key</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,133 +15,127 @@
       align-items: center;
       height: 100vh;
       text-align: center;
-    }.game-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+      flex-direction: column;
+    }
 
-.game-list {
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  max-width: 300px;
-  margin-bottom: 15px;
-}
+    .key-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-.game-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
+    .key-box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      color: black;
+      width: 250px;
+      position: relative;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      border: 2px solid black;
+    }
 
-.game-item img {
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
-}
+    .key-box h2 {
+      font-weight: bold;
+    }
 
-.game-item h3 {
-  font-size: 1.2rem;
-  margin: 10px 0;
-  word-wrap: break-word;
-}
+    .key-box input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 80%;
+      margin-top: 10px;
+      text-align: center;
+    }
 
-.game-item a {
-  text-decoration: none;
-  color: white;
-  background-color: #1a73e8;
-  padding: 10px 15px;
-  border-radius: 5px;
-  font-weight: bold;
-  display: inline-block;
-}
+    .key-box button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: black;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
 
-.game-item a:hover {
-  background-color: #135aba;
-}
+    .key-box button:hover {
+      background-color: gray;
+    }
 
-.alert-box {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  display: none;
-}
-
-.alert-buttons {
-  margin-top: 15px;
-}
-
-.alert-buttons button {
-  margin: 5px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.ok-btn {
-  background-color: #7289DA;
-  color: white;
-}
-
-.discord-btn {
-  background-color: #7289DA;
-  color: white;
-}
-
+    .message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
   </style>
 </head>
-<body><div class="alert-box" id="alertBox">
-  <p>Theo Dõi Cập Nhật</p>
-  <div class="alert-buttons">
-    <button class="ok-btn" onclick="closeAlert()">Ok Okk</button>
-    <button class="discord-btn" onclick="openDiscord()">Discord</button>
+<body>
+
+<div class="key-container" id="keyContainer">
+  <div class="key-box">
+    <h2>Turbo Lite</h2>
+    <h3>Bạn Cần Nhập Key Để Chơi</h3>
+    <h4>Free 24h Vô Hạn Chơi</h4>
+    <input type="text" id="userKey" placeholder="Dán Key Vào Đây">
+    <br>
+    <button onclick="window.open('https://link4sub.com/r6rI', '_blank')">Lấy Key</button>
+    <button onclick="checkKey()">Xác Nhận</button>
+    <p id="message" class="message"></p>
   </div>
-</div><div class="game-container">
-  <div class="game-list">
-    <div class="game-item">
-      <img src="https://dl.memuplay.com/new_market/img/com.tykeji.ugphone.icon.2024-03-04-11-52-41.png" alt="">
-      <h3>Thiết Bị VPN</h3>
-      <a href="https://now.gg/apps/discord-inc-/1430/discord-talk-chat-hang-out.html" target="_blank">Vào Thiết Bị</a>
-    </div>
-  </div>  <div class="game-list">
-    <div class="game-item">
-      <img src="https://dl.memuplay.com/new_market/img/com.tykeji.ugphone.icon.2024-03-04-11-52-41.png" alt="">
-      <h3>Không VPN</h3>
-      <a href="https://doctoraux.com/play/demo/5880/snakeplanet" target="_blank">Vào Thiết Bị</a>
-    </div>
-  </div>
-</div><script>
-  function showAlert() {
-    document.getElementById('alertBox').style.display = 'block';
+</div>
+
+<script>
+  const validKeys = ["TurboLite", "XYZ789", "TURBO999"]; // Danh sách key hợp lệ
+  const keyExpireTime = 24 * 60 * 60 * 1000; // 24 giờ
+  const redirectURL = "https://turbolite.github.io/Tab/"; // URL chuyển hướng sau khi nhập key
+
+  function checkKey() {
+    const userKey = document.getElementById("userKey").value;
+    const message = document.getElementById("message");
+
+    message.style.color = "blue";
+    message.textContent = "Chờ Check Xíuu";
+
+    setTimeout(() => {
+      if (validKeys.includes(userKey)) {
+        message.style.color = "green";
+        message.textContent = "Ok Thành Côngg";
+        localStorage.setItem("storedKey", userKey);
+        localStorage.setItem("keyTimestamp", Date.now().toString());
+
+        setTimeout(() => {
+          window.location.href = redirectURL;
+        }, 1500);
+      } else {
+        message.style.color = "red";
+        message.textContent = "Key Saiii";
+      }
+    }, 1000);
   }
 
-  function closeAlert() {
-    document.getElementById('alertBox').style.display = 'none';
+  function checkStoredKey() {
+    const storedKey = localStorage.getItem("storedKey");
+    const keyTimestamp = localStorage.getItem("keyTimestamp");
+
+    if (storedKey && validKeys.includes(storedKey)) {
+      if (keyTimestamp && Date.now() - parseInt(keyTimestamp) < keyExpireTime) {
+        document.getElementById("message").textContent = "Bạn Đã Nhập Key...";
+        setTimeout(() => {
+          window.location.href = redirectURL;
+        }, 1500);
+      }
+    }
   }
 
-  function openDiscord() {
-    window.open('https://discord.gg/83HpRAPkRX', '_blank');
-  }
+  checkStoredKey();
+</script>
 
-  window.onload = function() {
-    showAlert();
-  };
-</script></body>
+</body>
 </html>
